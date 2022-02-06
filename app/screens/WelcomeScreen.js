@@ -18,12 +18,23 @@ import {
   Pressable,
   KeyboardAvoidingView,
 } from "react-native";
+//import { auth } from "../../firebase";
 import HeaderComponent from "../assets/components/header";
 
 function WelcomeScreen({ navigation }) {
-  const [Id, setId] = useState(0);
+  const [Email, setEmail] = useState(0);
   const [Password, setPw] = useState("");
 
+  /* const handleSignUp = () => {
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((userCredentials) => {
+        const user = userCredentials.usze;
+        console.log(user.email);
+      })
+      .catch((error) => alert(error.message));
+  };
+ */
   const LoginHandler = () => {
     navigation.navigate("HomeScreen");
   };
@@ -39,7 +50,7 @@ function WelcomeScreen({ navigation }) {
       <View style={styles.IdContainer} KeyboardAvoidingView>
         <TextInput
           style={styles.Input}
-          placeholder="Identifiant"
+          placeholder="Email"
           onChangeText={(text) => setId(text)}
         />
         <TextInput
@@ -56,6 +67,15 @@ function WelcomeScreen({ navigation }) {
       >
         <Text style={styles.ButtonText}>CONNECTEZ VOUS</Text>
       </TouchableHighlight>
+      <View style={{}}>
+        <TouchableHighlight
+          style={[styles.LoginButton, {}]}
+          title="Créer un compte"
+          onPress={LoginHandler}
+        >
+          <Text style={styles.NewUserButton}>Creer un compte</Text>
+        </TouchableHighlight>
+      </View>
     </ImageBackground>
   );
 }
@@ -76,7 +96,7 @@ const styles = StyleSheet.create({
     bottom: "35%",
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 20,
+    borderRadius: 10,
   },
   Input: {
     height: 30,
@@ -119,6 +139,16 @@ const styles = StyleSheet.create({
   tinyLogo: {
     width: 120,
     height: 80,
+  },
+  NewUserButton: {
+    height: 40,
+    width: 120,
+    top: "45%",
+    borderRadius: 10,
+    backgroundColor: "rgba(30,200,00,0.7)",
+    justifyContent: "center",
+    alignItems: "center",
+    bottom: 10,
   },
 });
 
