@@ -78,8 +78,18 @@ export default function LoginScreen({ navigation }) {
       ) : null}
       <View style={styles.container}></View>
       <View style={styles.TextContainer}>
-        <Text>bienvenue sur</Text>
-        <Text style={styles.Title}>OPTIMOS</Text>
+        <Text>Bienvenue sur</Text>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "flex-start",
+          }}
+        >
+          <Text style={styles.Title}>Opti-MOS</Text>
+          <Text style={[styles.Title, { fontSize: 20, lineHeight: 50 }]}>
+            ®
+          </Text>
+        </View>
       </View>
 
       <View style={styles.IdContainer}>
@@ -105,7 +115,7 @@ export default function LoginScreen({ navigation }) {
           onPress={() => console.log(Firebase)}
           onPress={TestHandler}
         >
-          <Text>mot de passe oublié</Text>
+          <Text>Mot de passe oublié</Text>
         </TouchableHighlight>
       </View>
       <View style={{ top: "25%" }}>
@@ -124,7 +134,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   IdContainer: {
-    backgroundColor: "rgba(0,200,00,0.7)",
+    backgroundColor: "rgba(188, 212, 134, 0.8)",
     width: "80%",
     height: 105,
     justifyContent: "center",
@@ -142,7 +152,7 @@ const styles = StyleSheet.create({
     height: 40,
     width: 120,
     borderRadius: 10,
-    backgroundColor: "rgba(30,200,00,0.7)",
+    backgroundColor: "rgba(188, 212, 134, 0.8)",
     justifyContent: "center",
     alignItems: "center",
     top: 50,

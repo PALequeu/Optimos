@@ -14,7 +14,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import Dropdown from "../assets/components/Dropdown";
 import Checklist from "../assets/components/checklist";
-import HeaderComponent from "../assets/components/header";
+
 import Input from "../assets/components/Input";
 import FrequencyInput from "../assets/components/FrequencyInput";
 import DonneesSol from "../assets/components/DonneesSol";
@@ -44,7 +44,7 @@ function SimulatorScreen(props) {
 
   const navigationWatcher = useNavigation();
 
-  const questionsTypeExploit = [
+  const questionsOrientation = [
     {
       id: 1,
       question: "Céréalier",
@@ -183,11 +183,11 @@ function SimulatorScreen(props) {
       <TitleComponent navigation={navigationWatcher} title={"SIMULATEUR"} />
 
       <ScrollView style={styles.ScrollContainer}>
-        <Dropdown title="Type d'exploitation">
-          <Checklist data={questionsTypeExploit} />
+        <Dropdown title="Orientation">
+          <Checklist data={questionsOrientation} />
         </Dropdown>
 
-        <Dropdown title="Type d'agriculture">
+        <Dropdown title="Système Cultural">
           <Checklist data={questionsSyst} />
         </Dropdown>
 
@@ -250,7 +250,6 @@ const styles = StyleSheet.create({
   },
   ScrollContainer: {
     width: "100%",
-    //backgroundColor: "rgba(100,100,150,0.2)",
     top: 20,
     padding: 20,
   },
@@ -259,7 +258,7 @@ const styles = StyleSheet.create({
     width: "80%",
     left: "12%",
     borderRadius: 10,
-    backgroundColor: "rgba(30,200,00,0.7)",
+    backgroundColor: "#a9c26f",
     justifyContent: "center",
     alignItems: "center",
   },

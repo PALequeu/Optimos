@@ -8,14 +8,7 @@ function Dropdown(props) {
   return (
     <View style={{ paddingBottom: 15 }}>
       <TouchableOpacity
-        style={
-          props.done
-            ? [
-                styles.TitleContainer,
-                { backgroundColor: "rgba(200,200,100,1)" },
-              ]
-            : [styles.TitleContainer, { backgroundColor: "rgba(30,200,00,1)" }]
-        }
+        style={styles.TitleContainer}
         onPress={() => setShouldShow(!ShouldShow)}
       >
         <Text style={{ fontSize: 20 }}>{props.title}</Text>
@@ -31,6 +24,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flex: 1,
     width: "100%",
+    backgroundColor: "rgba(188, 212, 134, 1)",
     height: 40,
     alignItems: "center",
     justifyContent: "space-between",

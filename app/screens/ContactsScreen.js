@@ -1,15 +1,19 @@
 import React from "react";
 import { StyleSheet, Text, View, ImageBackground } from "react-native";
 import HeaderComponent from "../assets/components/header";
+import { useNavigation } from "@react-navigation/native";
+import TitleComponent from "../assets/components/Title";
 
 export default function ContactsScreen() {
+  const navigationWatcher = useNavigation();
+
   return (
     <ImageBackground
       blurRadius={5}
       style={styles.Background}
       source={require("../assets/fond_ble2.jpeg")}
     >
-      <HeaderComponent title="CONTACT" />
+      <TitleComponent title="Contacts" navigation={navigationWatcher} />
       <View style={styles.Container}>
         <Text style={styles.MainText}>LORCA</Text>
         <View style={{ alignItems: "center", top: 40 }}>
@@ -34,8 +38,8 @@ const styles = StyleSheet.create({
     top: "10%",
     width: "80%",
     height: "50%",
-    backgroundColor: "rgba(200,150,100,1)",
-    borderColor: "rgba(200,150,150,0.8)",
+    backgroundColor: "rgba(188, 212, 134, 1)",
+    borderColor: "#c9c8aa",
     borderWidth: 20,
     alignItems: "center",
   },
