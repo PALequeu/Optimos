@@ -8,16 +8,16 @@ import {
   KeyboardAvoidingView,
   Image,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { backgroundColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 import HeaderComponent from "../assets/components/header";
 import TitleComponent from "../assets/components/Title";
-import { useNavigation } from "@react-navigation/native";
 
-function HomeScreen({ navigation }) {
-  const navigationRouter = useNavigation();
+function MenuScreen({ navigation }) {
+  const navigationWatcher = useNavigation();
 
   const SimulatorHandler = () => {
-    navigation.navigate("SimulateurScreen");
+    navigation.navigate("FirstSimulatorScreen");
   };
 
   const ContactsHandler = () => {
@@ -31,39 +31,32 @@ function HomeScreen({ navigation }) {
       source={require("../assets/fond_ble2.jpeg")}
     >
       <TitleComponent
+        navigation={navigationWatcher}
         title="OPTIMOS"
-        navigation={navigationRouter}
         backButtonIsShown={false}
       />
-      <TouchableOpacity
-        style={[styles.cases, { width: "80%", height: "20%" }]}
-        onPress={SimulatorHandler}
-      >
+      <View>
+        <Text style={{ textAlign: "center", fontSize: 20 }}>
+          Bienvenue sur OPTIMOS, l'application vous permettant d'augmenter la
+          quantité et la qualité de la matière organique de vos sols
+        </Text>
+      </View>
+      <TouchableOpacity style={styles.cases} onPress={SimulatorHandler}>
         <Text style={styles.SimulatorText}>Simulateur</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={[styles.cases, { width: "80%", height: "15%" }]}>
-        <Text style={styles.FichesText}>Fiches Pratiques</Text>
+      <TouchableOpacity style={styles.cases}>
+        <Text style={styles.SimulatorText}>Ressources</Text>
       </TouchableOpacity>
-      <View style={styles.HistEtRess}>
-        <TouchableOpacity
-          style={[styles.cases, { width: "48%", height: "100%" }]}
-        >
-          <Text style={styles.HistoriqueText}>Historique</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.cases, { width: "48%", height: "100%" }]}
-        >
-          <Text style={styles.HistoriqueText}>Ressources</Text>
-        </TouchableOpacity>
-      </View>
+
+      <TouchableOpacity style={styles.cases}>
+        <Text style={styles.SimulatorText}>Chat</Text>
+      </TouchableOpacity>
+
       <TouchableOpacity
-        style={[styles.cases, { width: "80%", height: "7%" }]}
+        style={[styles.cases, { top: 150, width: "90%", height: "7%" }]}
         onPress={ContactsHandler}
       >
         <Text style={styles.FichesText}>Contacts</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={[styles.cases, { width: "80%", height: "7%" }]}>
-        <Text style={styles.FichesText}>Fun Facts</Text>
       </TouchableOpacity>
     </ImageBackground>
   );
@@ -79,9 +72,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 10,
-    top: 50,
+    top: 30,
     borderRadius: 15,
     backgroundColor: "rgba(30,200,00,0.8)",
+    width: "80%",
+    height: "15%",
   },
 
   FichesText: {
@@ -107,13 +102,5 @@ const styles = StyleSheet.create({
     width: 120,
     height: 80,
   },
-  LogoContainer: {
-    flexDirection: "row",
-    width: "100%",
-    height: 100,
-    justifyContent: "space-evenly",
-    alignItems: "flex-start",
-    paddingTop: 20,
-  },
 });
-export default HomeScreen;
+export default MenuScreen;

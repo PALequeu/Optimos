@@ -10,6 +10,7 @@ import {
 } from "react-native";
 
 import { useState } from "react/cjs/react.development";
+import { useNavigation } from "@react-navigation/native";
 
 import Dropdown from "../assets/components/Dropdown";
 import Checklist from "../assets/components/checklist";
@@ -17,6 +18,7 @@ import HeaderComponent from "../assets/components/header";
 import Input from "../assets/components/Input";
 import FrequencyInput from "../assets/components/FrequencyInput";
 import DonneesSol from "../assets/components/DonneesSol";
+import TitleComponent from "../assets/components/Title";
 
 function SimulatorScreen(props) {
   const [Cereales, setCereales] = useState(false);
@@ -39,6 +41,8 @@ function SimulatorScreen(props) {
   const [Corg, setCorg] = useState(0);
   const [PH, setPH] = useState(0);
   const [Cailloux, setCailloux] = useState(0);
+
+  const navigationWatcher = useNavigation();
 
   const questionsTypeExploit = [
     {
@@ -176,7 +180,7 @@ function SimulatorScreen(props) {
       style={styles.Background}
       source={require("../assets/fond_ble2.jpeg")}
     >
-      <HeaderComponent title={"SIMULATEUR"} />
+      <TitleComponent navigation={navigationWatcher} title={"SIMULATEUR"} />
 
       <ScrollView style={styles.ScrollContainer}>
         <Dropdown title="Type d'exploitation">

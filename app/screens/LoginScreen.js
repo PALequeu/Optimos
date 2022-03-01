@@ -5,20 +5,54 @@ import {
   TextInput,
   TouchableHighlight,
   ImageBackground,
+  Image,
+  Keyboard,
 } from "react-native";
-import React, { useState } from "react";
-import k from ".../config/firebase.js";
+import React, { useState, useEffect } from "react";
+import { Firebase } from "./firebase";
 //import { AuthenticatedUserContext } from "../navigation/AuthenticatedUserProvider";
 
-//const auth = Firebase.auth();
+//console.log("login screen", typeof auth);
 
 export default function LoginScreen({ navigation }) {
+  //Const for signing in
   const [Email, setEmail] = useState(0);
   const [Password, setPw] = useState("");
 
+  //Navigation handlers
   const CreateAccountHandler = () => {
     navigation.navigate("CreateAccountScreen");
   };
+
+  const LoginHandler = () => {
+    navigation.navigate("HomeScreen");
+  };
+
+  const TestHandler = () => {
+    navigation.navigate("MenuScreen");
+  };
+  //Keyboard detector
+  const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      "keyboardDidShow",
+      () => {
+        setKeyboardVisible(true); // or some other action
+      }
+    );
+    const keyboardDidHideListener = Keyboard.addListener(
+      "keyboardDidHide",
+      () => {
+        setKeyboardVisible(false); // or some other action
+      }
+    );
+
+    return () => {
+      keyboardDidHideListener.remove();
+      keyboardDidShowListener.remove();
+    };
+  }, []);
 
   return (
     <ImageBackground
@@ -26,6 +60,23 @@ export default function LoginScreen({ navigation }) {
       style={styles.Background}
       source={require("../assets/fond_ble2.jpeg")}
     >
+      {!isKeyboardVisible ? (
+        <View style={styles.LogoContainer}>
+          <Image
+            style={styles.tinyLogo}
+            source={require("../assets/mines_nancy.png")}
+          />
+          <Image
+            style={styles.tinyLogo}
+            source={require("../assets/logo_lorca.png")}
+          />
+          <Image
+            style={styles.tinyLogo}
+            source={require("../assets/logo_ensaia.png")}
+          />
+        </View>
+      ) : null}
+      <View style={styles.container}></View>
       <View style={styles.TextContainer}>
         <Text>bienvenue sur</Text>
         <Text style={styles.Title}>OPTIMOS</Text>
@@ -46,10 +97,14 @@ export default function LoginScreen({ navigation }) {
       </View>
 
       <View style={{ alignItems: "center", justifyContent: "center" }}>
-        <TouchableHighlight style={styles.LoginButton}>
+        <TouchableHighlight style={styles.LoginButton} onPress={LoginHandler}>
           <Text>Se connecter</Text>
         </TouchableHighlight>
-        <TouchableHighlight style={{ top: 70 }}>
+        <TouchableHighlight
+          style={{ top: 70 }}
+          onPress={() => console.log(Firebase)}
+          onPress={TestHandler}
+        >
           <Text>mot de passe oublié</Text>
         </TouchableHighlight>
       </View>
@@ -67,13 +122,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "lightgreen",
-    flexDirection: "column",
   },
   IdContainer: {
     backgroundColor: "rgba(0,200,00,0.7)",
     width: "80%",
-    height: 120,
+    height: 105,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
@@ -83,7 +136,7 @@ const styles = StyleSheet.create({
     margin: 5,
     borderWidth: 2,
     padding: 5,
-    width: "80%",
+    width: "90%",
   },
   LoginButton: {
     height: 40,
@@ -101,5 +154,18 @@ const styles = StyleSheet.create({
   },
   Title: {
     fontSize: 70,
+  },
+  LogoContainer: {
+    position: "absolute",
+    flexDirection: "row",
+    width: "100%",
+    height: "100%",
+    justifyContent: "space-evenly",
+    alignItems: "flex-start",
+    top: "7%",
+  },
+  tinyLogo: {
+    width: 120,
+    height: 80,
   },
 });
