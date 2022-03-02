@@ -20,7 +20,10 @@ import FrequencyInput from "../assets/components/FrequencyInput";
 import DonneesSol from "../assets/components/DonneesSol";
 import TitleComponent from "../assets/components/Title";
 
-function SimulatorScreen(props) {
+function SimulatorScreen({ navigation }) {
+  //cette page est vouée a disparaitre. Le fonctionnement va fondamentalement changer pour utiliser la base de donnée.
+  //Elle n'était de toute façon pas pratiqueet pas propre.
+
   const [Cereales, setCereales] = useState(false);
   const [Eleveur, setEleveur] = useState(false);
   const [CV, setCV] = useState(false);
@@ -43,6 +46,10 @@ function SimulatorScreen(props) {
   const [Cailloux, setCailloux] = useState(0);
 
   const navigationWatcher = useNavigation();
+
+  const AdvicesHandler = () => {
+    navigation.navigate("AdvicesScreen");
+  };
 
   const questionsOrientation = [
     {
@@ -225,6 +232,7 @@ function SimulatorScreen(props) {
         <TouchableHighlight
           style={styles.SimulatorButton}
           title="connectez-vous"
+          onPress={AdvicesHandler}
         >
           <Text style={styles.ButtonText}>LANCER LA SIMULATION</Text>
         </TouchableHighlight>
@@ -250,7 +258,7 @@ const styles = StyleSheet.create({
   },
   ScrollContainer: {
     width: "100%",
-    top: 20,
+    top: 0,
     padding: 20,
   },
   SimulatorButton: {

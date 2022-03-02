@@ -1,18 +1,17 @@
 import React from "react";
 
-import HomeScreen from "./app/screens/HomeScreen";
-import WelcomeScreen from "./app/screens/WelcomeScreen";
 import { NavigationContainer, StackActions } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { StyleSheet } from "react-native";
 
+import HomeScreen from "./app/screens/HomeScreen";
 import SimulatorScreen from "./app/screens/SimulatorScreen";
 import ContactsScreen from "./app/screens/ContactsScreen";
 import LoginScreen from "./app/screens/LoginScreen";
 import CreateAccountScreen from "./app/screens/CreateAccountScreen";
 import test from "./app/screens/test";
-import MenuScreen from "./app/screens/MenuScreen";
-import FirstSimulatorScreen from "./app/screens/FirstSimulatorScreen";
+import AdvicesScreen from "./app/screens/AdvicesScreen";
+
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -25,15 +24,10 @@ export default function App() {
           name="CreateAccountScreen"
           component={CreateAccountScreen}
         />
-        <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
+        <Stack.Screen name="AdvicesScreen" component={AdvicesScreen} />
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="SimulateurScreen" component={SimulatorScreen} />
         <Stack.Screen name="ContactsScreen" component={ContactsScreen} />
-        <Stack.Screen name="MenuScreen" component={MenuScreen} />
-        <Stack.Screen
-          name="FirstSimulatorScreen"
-          component={FirstSimulatorScreen}
-        />
       </Stack.Navigator>
     </NavigationContainer>
   );
