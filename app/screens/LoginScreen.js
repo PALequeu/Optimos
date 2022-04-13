@@ -9,10 +9,21 @@ import {
   Keyboard,
 } from "react-native";
 import React, { useState, useEffect } from "react";
-import { Firebase } from "./firebase";
+import { useNavigation } from "@react-navigation/native";
+//import { auth, Firebase } from "../../firebase";
 //import { AuthenticatedUserContext } from "../navigation/AuthenticatedUserProvider";
 
-//console.log("login screen", typeof auth);
+//import * as Application from "expo-application";
+
+/* const handleSignup = () => {
+  auth
+    .createUserWithEmailAndPassword(Email, Password)
+    .then((userCredentials) => {
+      const user = userCredentials.user;
+      console.log(user);
+    })
+    .catch((error) => alert(error.message));
+}; */
 
 export default function LoginScreen({ navigation }) {
   //Const for signing in
@@ -20,6 +31,8 @@ export default function LoginScreen({ navigation }) {
   const [Password, setPw] = useState("");
 
   //Navigation handlers
+  const navigationRouter = useNavigation();
+
   const CreateAccountHandler = () => {
     navigation.navigate("CreateAccountScreen");
   };
@@ -112,8 +125,8 @@ export default function LoginScreen({ navigation }) {
         </TouchableHighlight>
         <TouchableHighlight
           style={{ top: 70 }}
-          onPress={() => console.log(Firebase)}
-          onPress={TestHandler}
+          //onPress={handleSignup}
+          //onPress={TestHandler}
         >
           <Text>Mot de passe oublié</Text>
         </TouchableHighlight>

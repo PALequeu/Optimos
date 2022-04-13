@@ -17,11 +17,19 @@ function HomeScreen({ navigation }) {
   const navigationRouter = useNavigation();
 
   const SimulatorHandler = () => {
-    navigation.navigate("SimulateurScreen");
+    navigation.navigate("ChooseParcelScreen");
   };
 
   const ContactsHandler = () => {
     navigation.navigate("ContactsScreen");
+  };
+
+  const HistoricHandler = () => {
+    navigation.navigate("HistoricScreen");
+  };
+
+  const FichesHandler = () => {
+    navigation.navigate("FichesScreen");
   };
 
   return (
@@ -65,6 +73,7 @@ function HomeScreen({ navigation }) {
             borderTopLeftRadius: 0,
           },
         ]}
+        onPress={HistoricHandler}
       >
         <Text style={styles.FichesText}>Historique des simulations</Text>
       </TouchableOpacity>
@@ -80,6 +89,7 @@ function HomeScreen({ navigation }) {
               borderTopRightRadius: 0,
             },
           ]}
+          onPress={FichesHandler}
         >
           <Text style={styles.HistoriqueText}>Fiches pratiques</Text>
         </TouchableOpacity>

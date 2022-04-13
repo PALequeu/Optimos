@@ -9,7 +9,7 @@ import {
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 
-function test() {
+function Test() {
   const navigation = useNavigation();
 
   return (
@@ -31,7 +31,7 @@ function test() {
   );
 }
 
-export default test;
+export default Test;
 
 const styles = StyleSheet.create({
   Background: {
