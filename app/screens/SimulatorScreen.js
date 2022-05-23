@@ -22,7 +22,7 @@ import TitleComponent from "../assets/components/Title";
 
 function SimulatorScreen({ navigation }) {
   //cette page est vouée a disparaitre. Le fonctionnement va fondamentalement changer pour utiliser la base de donnée.
-  //Elle n'était de toute façon pas pratiqueet pas propre.
+  //Elle n'était de toute façon pas pratique et pas propre.
 
   const [Cereales, setCereales] = useState(false);
   const [Eleveur, setEleveur] = useState(false);
