@@ -9,8 +9,10 @@ import {
 import React, { useState, useEffect } from "react";
 import TitleComponent from "../assets/components/Title";
 import { useNavigation } from "@react-navigation/native";
-//import { createUserWithEmailAndPassword } from "firebase/auth";
-import { authentication } from "../assets/components/config";
+//import firebase from "firebase/app";
+//import "@firebase/auth";
+//import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+//import { authentication } from "../assets/components/config";
 
 export default function CreateAccountScreen() {
   const navigationRouter = useNavigation;
@@ -23,7 +25,10 @@ export default function CreateAccountScreen() {
   const [ConfirmPassword, setConfirmPw] = useState("");
 
   function signUp() {
-    createUserWithEmailAndPassword(authentication, Email, Password)
+    console.log(Email, Password);
+
+    auth
+      .createUserWithEmailAndPassword(authentication, Email, Password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
@@ -93,7 +98,7 @@ export default function CreateAccountScreen() {
           les mots de passe ne sont pas identiques !
         </Text>
       ) : null}
-      <TouchableHighlight style={styles.LoginButton}>
+      <TouchableHighlight style={styles.LoginButton} onPress={signUp}>
         <Text>Créer un compte !</Text>
       </TouchableHighlight>
     </ImageBackground>
