@@ -29,13 +29,15 @@ function SimulatorScreen({ navigation }) {
   const [CV, setCV] = useState(false);
   const [AB, setAB] = useState(false);
   const [ACS, setACS] = useState(false);
+  const [AmendOrg, setAmendOrg] = useState(false);
+  const [Engrais, setEngrais] = useState(false);
+  const [FertiMinerale, setFertiMinerale] = useState(false);
+  const [LongueurRot, setLongueurRot] = useState(0);
+
   const [Prairies, setPrairies] = useState(false);
   const [CulturePrint, setCulturePrint] = useState(false);
   const [Legumineuse, setLegumineuse] = useState(false);
-  const [AmendOrg, setAmendOrg] = useState(false);
-  const [Engrais, setEngrais] = useState(false);
-  const [Chaulage, setChaulage] = useState(false);
-  const [LongueurRot, setLongueurRot] = useState(0);
+
   const [Labour, setLabour] = useState(0);
   const [CulturesInter, setCulturesInter] = useState(0);
   const [RestitPaille, setRestitPaille] = useState(0);
@@ -137,9 +139,9 @@ function SimulatorScreen({ navigation }) {
     },
     {
       id: 3,
-      question: "Chaulage",
-      checked: Chaulage,
-      changeChecked: () => setChaulage(!Chaulage),
+      question: "Fertilisation minérale",
+      checked: FertiMinerale,
+      changeChecked: () => setFertiMinerale(!FertiMinerale),
     },
   ];
 
@@ -151,20 +153,7 @@ function SimulatorScreen({ navigation }) {
       changeValue: setArgileVraie,
       unit: "g/kg",
     },
-    {
-      id: 2,
-      question: "carbonate de calcium : ",
-      value: CACO3,
-      changeValue: setCACO3,
-      unit: "g/kg",
-    },
-    {
-      id: 3,
-      question: "carbone organique : ",
-      value: Corg,
-      changeValue: setCorg,
-      unit: "g/kg",
-    },
+
     {
       id: 4,
       question: "pH : ",
@@ -174,7 +163,7 @@ function SimulatorScreen({ navigation }) {
     },
     {
       id: 5,
-      question: "cailloux en volume : ",
+      question: "taux de cailloux : ",
       value: Cailloux,
       changeValue: setCailloux,
       unit: "%",
@@ -198,10 +187,10 @@ function SimulatorScreen({ navigation }) {
           <Checklist data={questionsSyst} />
         </Dropdown>
 
-        <Dropdown title="Pratiques culturales">
+        {/*  <Dropdown title="Pratiques culturales">
           <Checklist data={questionsPresences} />
         </Dropdown>
-
+ */}
         <Dropdown title="Amendements et engrais ">
           <Checklist data={questionsPratiqueCult} />
         </Dropdown>
