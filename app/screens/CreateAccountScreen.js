@@ -15,7 +15,7 @@ import { useNavigation } from "@react-navigation/native";
 //import { authentication } from "../assets/components/config";
 
 export default function CreateAccountScreen() {
-  const navigationRouter = useNavigation;
+  const navigationRouter = useNavigation();
   const [Nom, setNom] = useState("");
   const [Prenom, setPrenom] = useState("");
   const [Email, setEmail] = useState(0);
@@ -44,6 +44,10 @@ export default function CreateAccountScreen() {
         // ..
       });
   }
+
+  const backToLoginScreen = () => {
+    navigationRouter.goBack();
+  };
 
   return (
     <ImageBackground
@@ -101,6 +105,12 @@ export default function CreateAccountScreen() {
       <TouchableHighlight style={styles.LoginButton} onPress={signUp}>
         <Text>Créer un compte !</Text>
       </TouchableHighlight>
+      <TouchableHighlight
+        style={styles.LoginButton}
+        onPress={backToLoginScreen}
+      >
+        <Text>J'ai déjà un compte</Text>
+      </TouchableHighlight>
     </ImageBackground>
   );
 }
@@ -119,12 +129,13 @@ const styles = StyleSheet.create({
   },
   LoginButton: {
     height: 40,
-    width: 120,
+    width: 150,
     borderRadius: 10,
     backgroundColor: "rgba(188, 212, 134, 0.8)",
     justifyContent: "center",
     alignItems: "center",
     top: 50,
+    margin: 10,
   },
   Warningtext: {
     color: "red",

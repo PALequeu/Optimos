@@ -9,31 +9,28 @@ import {
   Keyboard,
 } from "react-native";
 import React, { useState, useEffect } from "react";
-import { useNavigation } from "@react-navigation/native";
 
-//import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
 //import { authentication } from "../assets/components/config";
 
 export default function LoginScreen({ navigation }) {
   //Const for signing in
-  const [Email, setEmail] = useState(0);
-  const [Password, setPw] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+
+  const auth = getAuth();
 
   //Navigation handlers
-  const navigationRouter = useNavigation();
 
   const CreateAccountHandler = () => {
     navigation.navigate("CreateAccountScreen");
   };
 
   const LoginHandler = () => {
+    signIn();
     navigation.navigate("HomeScreen");
   };
-
-  const TestHandler = () => {
-    navigation.navigate("MenuScreen");
-  };
-  const [isKeyboardVisible, setKeyboardVisible] = useState(false);
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -56,7 +53,7 @@ export default function LoginScreen({ navigation }) {
   }, []);
 
   function signIn() {
-    signInWithEmailAndPassword(authentication, Email, Password)
+    signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
@@ -113,13 +110,14 @@ export default function LoginScreen({ navigation }) {
       <View style={styles.IdContainer}>
         <TextInput
           style={styles.Input}
+          autoCapitalize="none"
           placeholder="Email"
           onChangeText={(text) => setEmail(text)}
         />
         <TextInput
           style={styles.Input}
           placeholder="Mot De Passe"
-          onChangeText={(pw) => setPw(pw)}
+          onChangeText={(pw) => setPassword(pw)}
           secureTextEntry
         />
       </View>
@@ -128,7 +126,10 @@ export default function LoginScreen({ navigation }) {
         <TouchableHighlight style={styles.LoginButton} onPress={LoginHandler}>
           <Text>Se connecter</Text>
         </TouchableHighlight>
-        <TouchableHighlight style={{ top: 70 }} onPress={signIn}>
+        <TouchableHighlight
+          style={{ top: 70 }}
+          onPress={() => console.log("mdp oublié touched")}
+        >
           <Text>Mot de passe oublié</Text>
         </TouchableHighlight>
       </View>
