@@ -1,6 +1,6 @@
 import React from "react";
 
-import { NavigationContainer, StackActions } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { StyleSheet } from "react-native";
 
@@ -9,7 +9,6 @@ import SimulatorScreen from "./app/screens/SimulatorScreen";
 import ContactsScreen from "./app/screens/ContactsScreen";
 import LoginScreen from "./app/screens/LoginScreen";
 import CreateAccountScreen from "./app/screens/CreateAccountScreen";
-
 import AdvicesScreen from "./app/screens/AdvicesScreen";
 import ChooseParcelScreen from "./app/screens/ChooseParcelScreen";
 import HistoricScreen from "./app/screens/HistoricScreen";
@@ -26,25 +25,33 @@ const firebaseConfig = {
   appId: "1:68022704335:web:0389644cf25e893ae0ffba",
 };
 
-if (!getApps().length) initializeApp(firebaseConfig);
+var app = null;
+if (!getApps().length) {
+  app = initializeApp(firebaseConfig);
+}
+
+import { getFirestore } from "firebase/firestore";
+global.db = getFirestore(initializeApp(firebaseConfig));
 
 const Stack = createStackNavigator();
 
 export default function App() {
   const auth = getAuth();
-  console.log(auth);
+
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ header: () => null }}>
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
-        <Stack.Screen
-          name="CreateAccountScreen"
-          component={CreateAccountScreen}
-        />
+
+        <Stack.Screen name="HomeScreen" component={HomeScreen} />
         {auth.currentUser && (
           <>
+            <Stack.Screen
+              name="CreateAccountScreen"
+              component={CreateAccountScreen}
+            />
             <Stack.Screen name="AdvicesScreen" component={AdvicesScreen} />
-            <Stack.Screen name="HomeScreen" component={HomeScreen} />
+
             <Stack.Screen name="SimulatorScreen" component={SimulatorScreen} />
             <Stack.Screen name="ContactsScreen" component={ContactsScreen} />
             <Stack.Screen name="HistoricScreen" component={HistoricScreen} />

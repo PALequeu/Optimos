@@ -12,8 +12,18 @@ import { backgroundColor } from "react-native/Libraries/Components/View/ReactNat
 import HeaderComponent from "../assets/components/header";
 import TitleComponent from "../assets/components/Title";
 import { useNavigation } from "@react-navigation/native";
+import { doc, getDoc } from "firebase/firestore";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
+const auth = getAuth();
+const user = auth.currentUser;
+
+const userData = doc(db, "users", user.uid);
+
+if (user !== null) {
+}
 function HomeScreen({ navigation }) {
+  console.log(userData);
   const navigationRouter = useNavigation();
 
   const SimulatorHandler = () => {
@@ -45,7 +55,8 @@ function HomeScreen({ navigation }) {
       />
 
       <Text style={{ fontSize: 20, lineHeight: 30, textAlign: "center" }}>
-        Un OAD pour une meilleure gestion de la fertilité des sols lorrains
+        {userData.LastName} {userData.FirstName} Un OAD pour une meilleure
+        gestion de la fertilité des sols lorrains
       </Text>
       <TouchableOpacity
         style={[

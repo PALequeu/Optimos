@@ -9,9 +9,7 @@ import {
   Keyboard,
 } from "react-native";
 import React, { useState, useEffect } from "react";
-
 import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
-//import { authentication } from "../assets/components/config";
 
 export default function LoginScreen({ navigation }) {
   //Const for signing in
@@ -29,6 +27,7 @@ export default function LoginScreen({ navigation }) {
 
   const LoginHandler = () => {
     signIn();
+    //console.log(auth.currentUser);
     navigation.navigate("HomeScreen");
   };
 
@@ -59,7 +58,6 @@ export default function LoginScreen({ navigation }) {
         const user = userCredential.user;
         //your code
 
-        console.log("Sucessfully signed in!", user);
         // ...
       })
       .catch((error) => {
