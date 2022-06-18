@@ -20,7 +20,6 @@ export default function LoginScreen({ navigation }) {
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
 
   const auth = getAuth();
-
   //Navigation handlers
 
   const CreateAccountHandler = () => {
@@ -29,7 +28,6 @@ export default function LoginScreen({ navigation }) {
 
   const LoginHandler = () => {
     signIn();
-    navigation.navigate("HomeScreen");
   };
 
   useEffect(() => {
@@ -59,8 +57,8 @@ export default function LoginScreen({ navigation }) {
         const user = userCredential.user;
         //your code
 
-        console.log("Sucessfully signed in!", user);
-        // ...
+        console.log("Sucessfully signed in!", user.uid);
+        global.IsSignedIn = true;
       })
       .catch((error) => {
         const errorCode = error.code;

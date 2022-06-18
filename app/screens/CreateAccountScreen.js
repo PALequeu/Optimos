@@ -9,12 +9,10 @@ import {
 import React, { useState, useEffect } from "react";
 import TitleComponent from "../assets/components/Title";
 import { useNavigation } from "@react-navigation/native";
-//import firebase from "firebase/app";
-//import "@firebase/auth";
-//import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-//import { authentication } from "../assets/components/config";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { collection, doc, Firestore, setDoc } from "firebase/firestore";
 
-export default function CreateAccountScreen() {
+export default function CreateAccountScreen({ navigation }) {
   const navigationRouter = useNavigation();
   const [Nom, setNom] = useState("");
   const [Prenom, setPrenom] = useState("");
@@ -24,23 +22,31 @@ export default function CreateAccountScreen() {
   const [Password, setPw] = useState("");
   const [ConfirmPassword, setConfirmPw] = useState("");
 
-  function signUp() {
-    console.log(Email, Password);
+  const auth = getAuth();
 
-    auth
-      .createUserWithEmailAndPassword(authentication, Email, Password)
+  const CreateAccountHandler = () => {
+    SignUp();
+    navigation.navigate("HomeScreen");
+  };
+
+  function SignUp() {
+    createUserWithEmailAndPassword(auth, Email, Password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        // your code
-
-        alert("Successfully sign up!");
-        // ...
+        console.log("user created", user.uid);
+        console.log("starting db");
+        setDoc(doc(db, "users", user.uid), {
+          userId: user.uid,
+          FirstName: Nom,
+          LastName: Prenom,
+          LorcaId: NumAdher,
+          Phone: Telephone,
+        });
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorMessage);
         // ..
       });
   }
@@ -102,7 +108,10 @@ export default function CreateAccountScreen() {
           les mots de passe ne sont pas identiques !
         </Text>
       ) : null}
-      <TouchableHighlight style={styles.LoginButton} onPress={signUp}>
+      <TouchableHighlight
+        style={styles.LoginButton}
+        onPress={CreateAccountHandler}
+      >
         <Text>Créer un compte !</Text>
       </TouchableHighlight>
       <TouchableHighlight
