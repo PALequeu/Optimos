@@ -12,8 +12,24 @@ import TitleComponent from "../assets/components/Title";
 import { useNavigation } from "@react-navigation/native";
 import { fonts } from "react-native-elements/dist/config";
 import { styleProps } from "react-native-web/dist/cjs/modules/forwardedProps";
+import { collection, addDoc, getDocs } from "firebase/firestore";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
+const auth = getAuth();
 
 export default function ChooseParcelScreen({ navigation }) {
+  var uid = 0;
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      uid = user.uid;
+      // ...
+    } else {
+      // User is signed out
+      // ...
+    }
+  });
   const navigationWatcher = useNavigation();
 
   const SimulatorHandler = () => {
@@ -21,13 +37,20 @@ export default function ChooseParcelScreen({ navigation }) {
   };
 
   const [Parcels, UpdateParcels] = useState([]);
-  const [Counter, AddCounter] = useState(1);
+  const [Counter, SetCounter] = useState(1);
   const [ParcelName, UpdateParcelName] = useState(Counter);
   const [PopUpView, SetPopUpView] = useState(false);
 
-  const AddParcel = () => {
-    AddCounter(Counter + 1);
+  let AddParcel = () => {
     SetPopUpView(false);
+    const docRef = addDoc(collection(db, "users", uid, "parcelles"), {
+      Name: ParcelName,
+    });
+
+    const querySnapshot = getDocs(collection(db, "users", uid, "parcelles"));
+    querySnapshot.forEach((doc) => {
+      console.log(`${doc.id} => ${doc.data()}`);
+    });
     const arr = [...Parcels];
     arr.push(
       <TouchableOpacity

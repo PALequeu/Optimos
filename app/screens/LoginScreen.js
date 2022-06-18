@@ -28,6 +28,7 @@ export default function LoginScreen({ navigation }) {
 
   const LoginHandler = () => {
     signIn();
+    navigation.navigate("HomeScreen");
   };
 
   useEffect(() => {
